@@ -34,10 +34,10 @@ Known commands are: up down left right select home fwd back pause
 Making an alias for 'ruku pause' is nice for quick pause/play while computing.
 
 If scanning doesn't work for adding boxes then you'll have to figure out what
-the hostname or IP address of a box is (the hostname usually starts 'NP-').
+the IP of the box is - it's available in Settings -> Player Info on the box.
 Then add it manually:
 
-  ruku add HOSTNAME_OR_IP
+  ruku add IP
 
 Any method of adding boxes creates a '.ruku-boxes' file in your $HOME directory
 that contains an IP or hostname per line (followed optionally by a colon and a
