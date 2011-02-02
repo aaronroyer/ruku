@@ -54,12 +54,13 @@ module Ruku
 
     # Scan for Roku boxes on the local network
     def self.scan(stop_on_first=false)
-      # TODO: don't just use the typical subnet for a home network; figure it out
-      # TODO: don't use the naive hostname method for identifying a box
+      # TODO: don't just use the typical IP/subnet for a home network; figure it out
       boxes = []
       prefix = '192.168.1.'
       (0..255).each do |host|
         info = Socket.getaddrinfo(prefix + host.to_s, DEFAULT_PORT)
+        # Is there a better way to identify a Roku box other than looking for a hostname
+        # starting with 'NP-'? There probably is - is the better way also quick?
         boxes << Remote.new(info[0][3]) if info[0][2] =~ /^NP-/i
         break if stop_on_first && !boxes.empty?
       end

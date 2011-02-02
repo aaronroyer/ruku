@@ -1,4 +1,4 @@
-= Ruku -- Ruby Roku™ set-top box remote
+= Ruku -- Roku™ set-top box remote control, command line and web interfaces
 
 == Installation
 
@@ -10,12 +10,12 @@ The following launches the web interface. See it at http://localhost:3030
 
   ruku --web
 
-You can use this to scan for boxes and start controlling them. I recommend
+You can use this to scan for or add boxes and start controlling them. I recommend
 using the keyboard (super snappy controlling!). Arrow keys (and vi directional
 keys) work, Space plays and pauses, Enter selects, and Esc is home.
 
 You can also just use the command line. Ruku needs to know about your Roku
-box(es). If you haven't found any boxes with the web interface, try:
+box(es). If you haven't added any boxes with the web interface, try:
 
   ruku scan
 
@@ -30,6 +30,8 @@ Assuming you have a least one box set up, you can start sending commands.
   ruku back    # Rewind
 
 Known commands are: up down left right select home fwd back pause
+
+Making an alias for 'ruku pause' is nice for quick pause/play while computing.
 
 If scanning doesn't work for adding boxes then you'll have to figure out what
 the hostname or IP address of a box is (the hostname usually starts 'NP-').
