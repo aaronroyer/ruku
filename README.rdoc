@@ -1,4 +1,6 @@
-= Ruku -- Roku™ set-top box remote control, command line and web interfaces
+= Ruku
+
+Ruku is a Roku™ set-top box remote control, with command line and web interfaces
 
 == Installation
 
@@ -80,13 +82,12 @@ Ruku is MIT licensed.
 
 :include: MIT-LICENSE
 
-= Other stuff
+== Other stuff
 
 Author::   Aaron Royer <aaronroyer@gmail.com>
 Requires:: Ruby 1.8.6 or later
-License::  Copyright 2010 by Aaron Royer.
-           Released under an MIT-style license.  See the LICENSE file
-           included in the distribution.
+License::  Copyright 2010-2011 by Aaron Royer
+           MIT licensed - see the MIT-LICENSE file included in the distribution
 
 == Warranty
 
