@@ -1,0 +1,50 @@
+#!/usr/bin/env ruby
+begin
+  require 'ruku/clients/simple'
+  require 'ruku/clients/web'
+rescue LoadError
+  # For testing and dev and stuff
+  $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+  require 'ruku/clients/simple'
+  require 'ruku/clients/web'
+end
+
+if ARGV.empty? || ARGV.include?('-h') || ARGV.include?('--help')
+  help = <<HELP
+Usage: ruku COMMAND/OPERATION
+
+Controller for Roku set top boxes. You will need to first scan the network for
+boxes using 'ruku scan' or add boxes manually using 'ruku add HOST'. Once
+'ruku list' shows an active box, you can start sending commands like
+'ruku pause' (play/pause) or 'ruku left' (Roku remote left button).
+
+COMMAND is a command to be sent to the active Roku box, if there is one.
+Known Roku commands:
+  #{Ruku::Remote::KNOWN_COMMANDS.join(', ')}
+  (you can send unknown commands; the box should ignore)
+The -c is available in case you need to explicitly send a command to the
+  Roku box, to disambiguate from a ruku operation (see below)
+
+OPERATION is for managing the Roku boxes for ruku to use.
+ruku operations:
+  scan                        Scan for Roku boxes on the network
+  list                        List Roku boxes
+  name NUM NAME               Set the name of a box from the list
+  add HOST_OR_IP NAME         Add a box with the HOST_OR_IP and (optional) NAME
+
+Alternatively, use 'ruku --web' to start the server for the web client. You
+should then be able to visit http://localhost:3030 to see the interface. You
+can specify a different port with '-p PORT'.
+
+Options:
+  -c, --force-roku-command    Force send command to the active Roku box
+      --web                   Fire up the web client (port 3030 default)
+  -p, --port PORT             Specify port (only use with --web)
+  -h, --help                  Show this message
+HELP
+  puts help
+elsif ARGV.include?('--web')
+  Ruku::Clients::Web.new.start
+else
+  Ruku::Clients::Simple.new.run_from_command_line
+end

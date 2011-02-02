@@ -1,0 +1,196 @@
+body {
+	background-color: #ddd;
+	font-size: 75%;
+	color: #222;
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+
+.buttonLink {
+	text-decoration: none;
+	color: #999;
+	border: 1px solid #999;
+	padding-left: 2px;
+	padding-right: 2px;
+	cursor: pointer;
+}
+
+.buttonLink:hover {
+	background-color: #ddd;
+}
+
+#topBar {
+	position: relative;
+	width: 320px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #555;
+	padding-top: 6px;
+	padding-bottom: 7px;
+}
+
+#listRemotesButton {
+	position: absolute;
+	left: 8px;
+	color: #ccc;
+	text-decoration: none;
+	border: 1px solid #ccc;
+	padding: 2px;
+	border-radius: 2px;
+}
+
+#listRemotesButton:hover {
+	background-color: #777;
+}
+
+#activeRemoteTitle {
+	color: #eee;
+	font-size: 125%;
+	font-weight: bold;
+}
+
+#remote {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#remoteMenuContainer {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#remoteMenu {
+	position: relative;
+	width: 290px;
+	margin: auto;
+	margin-top: 50px;
+	padding: 8px;
+	background-color: #fff;
+	border: 3px solid #999;
+	overflow: auto;
+	z-index: 1002;
+}
+
+#remoteMenu .title {
+	width: 100%;
+	font-size: 100%;
+	padding-bottom: 8px;
+	margin-left: auto;
+	margin-right: auto;
+	border-bottom: 1px solid black;
+	text-align: center;
+	font-weight: bold;
+}
+
+#remoteMenu #closeButton {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+}
+
+#remoteMenu #scanButton {
+	position: absolute;
+	top: 4px;
+	left: 4px;
+}
+
+#remoteMenu .remote {
+	margin-top: 8px;
+}
+
+#remoteMenu .remote > div {
+	display: inline-block;
+}
+
+#remoteMenu .activeRemoteRadio {
+	position: relative;
+	top: -15px;
+	left: -15px;
+}
+
+#remoteMenu .remote .info {
+	position: relative;
+	top: -5px;
+}
+
+#remoteMenu .remote .name {
+	border: 1px solid white;
+	font-size: 110%;
+}
+
+#remoteMenu .remote .over {
+	border: 1px solid black;
+}
+
+#remoteMenu .remote .host {
+	font-size: 90%;
+	color: orange;
+	text-align: left;
+	margin-left: 5px;
+}
+
+#remoteMenu .noRemotesMessage {
+	margin-top: 10px;
+	border: none;
+}
+
+#firstBoxInfo .message {
+	text-align: center;
+	font-weight: bold;
+	font-size: 125%;
+	margin-top: 10px;
+}
+
+#firstBoxInfo .boxInfo {
+	height: 90px;
+}
+
+#firstBoxInfo img, #firstBoxInfo .details {
+	float: left;
+}
+
+#firstBoxInfo img {
+	margin-top: 20px;
+	margin-left: 35px;
+}
+
+#firstBoxInfo .details {
+	margin-top: 30px;
+	margin-left: 20px;
+}
+
+#firstBoxInfo .details .name {
+	font-size: 130%;
+}
+
+#firstBoxInfo .details .host {
+	margin-top: 10px;
+	color: orange;
+}
+
+#firstBoxInfo .menu {
+	margin-top: 8px;
+	text-align: center;
+}
+
+#firstBoxInfo .menu .moreButton {
+	margin-left: 10px;
+}
+
+#manualAddBox {
+	margin-top: 20px;
+}
+
+#manualAddBox input {
+	margin-right: 5px;
+}
+
+.button {
+	cursor: pointer;
+}

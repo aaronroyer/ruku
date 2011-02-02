@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+	<!-- A little iPhone stuff -->
+	<meta name = "viewport" content = "width = device-width">
+	<meta name = "viewport" content = "initial-scale = 1.0, user-scalable = no">
+
+	<title>Ruku</title>
+	<link rel="stylesheet" href="css/ruku.css" type="text/css" media="screen" charset="utf-8" />
+	<script type="text/javascript" src="js/jquery-1.4.2.js"></script>
+	<script type="text/javascript" src="js/ruku.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(function() {
+			var remoteMenu = RUKU.createRemoteMenu($("#remoteMenu"), $("#activeRemoteTitle"));
+			remoteMenu.load();
+
+			$("#listRemotesButton").click(function() {
+				if ($("#remoteMenu").is(":visible")) {
+					remoteMenu.hide();
+				} else {
+					remoteMenu.listRemotes();
+				}
+				return false;
+			});
+
+			// Grab the command name from the src attribute of a command button
+			function name(elem) {
+				return elem.attr("src").split("/")[2].replace(".png", "").replace("-over", "");
+			}
+
+			// Grab a command button by the command name
+			function findByName(name) {
+				var elem;
+				$(".button").each(function() {
+					if ($(this).attr("src").indexOf(name) !== -1) {
+						elem = $(this);
+						return false;
+					}
+				});
+				return elem;
+			}
+
+			// Set a command button image to its highlighted form
+			function highlight(name) {
+				var elem = findByName(name);
+				if (elem && elem.attr("src").indexOf("-over") === -1) {
+						elem.attr("src", elem.attr("src").replace(name, name + "-over"));
+				}
+			}
+
+			// Set a command button image to its non-highlighted form
+			function unhighlight(name) {
+				var elem = findByName(name);
+				if (elem && elem.attr("src").indexOf(name + "-over") !== -1) {
+					elem.attr("src", elem.attr("src").replace(name + "-over", name));
+				}
+			}
+
+			// Set a command button image to its highlighted form for a moment, then back to non-highlighted
+			function flash(name) {
+				highlight(name);
+				window.setTimeout(function() {
+					unhighlight(name);
+				}, 200);
+			}
+
+			$(".button").hover(
+				function() {
+					$(this).attr("src", $(this).attr("src").replace(name($(this)), name($(this)) + "-over"));
+				},
+				function() {
+					$(this).attr("src", $(this).attr("src").replace(name($(this)) + "-over", name($(this))));
+				}
+			);
+
+			$(".button").click(function() {
+				var remote = remoteMenu.getActiveRemote();
+				if (remote) {
+					remote[name($(this))]();
+				}
+				return false;
+			});
+
+			// Make sure we can just use the keyboard for everything
+			var codes = {
+				"13":"select", // enter
+				"27":"home", // esc
+				"32":"pause", // space
+				"36":"home", // home
+				"37":"left",
+				"38":"up",
+				"39":"right",
+				"40":"down",
+				"66":"back", // b
+				"70":"fwd", // f
+
+				// Everybody loves vi!
+				"72":"left", // h
+				"74":"down", // j
+				"75":"up", // k
+				"76":"right" // l
+			};
+			$(document).keydown(function(event) {
+				// Do not repond to keyboard events when menu is open
+				if ($("#remoteMenu").is(":visible")) {
+					return;
+				}
+
+				var code = event.which;
+				if (code) {
+					var prop;
+					for (prop in codes) {
+						if (codes.hasOwnProperty(prop)) {
+							var cmd = codes[code];
+							if (cmd) {
+								var remote = remoteMenu.getActiveRemote();
+								if (remote) {
+									remote[cmd]();
+									flash(cmd);
+								}
+								break;
+							}
+						}
+					}
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="remoteMenuContainer" style="display:none;">
+		<div id="remoteMenu" style="display:none;">
+			<a id="closeButton" class="buttonLink" href="#">X close</a>
+			<a id="scanButton" class="buttonLink" href="#">scan for boxes</a>
+			<div class="title">Remotes Setup</div>
+			<div id="remoteList"></div>
+			<div id="firstBoxInfo" style="display:none;"></div>
+		</div>
+	</div>
+
+	<div id="topBar">
+		<a id="listRemotesButton" href="#">setup</a>
+		<div id="activeRemoteTitle">&nbsp;</div>
+	</div>
+	<table id="remote" width="320" height="369" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td colspan="2">
+				<img class="button" src="images/remote/home.png" width="82" height="104" alt=""></td>
+			<td colspan="5">
+				<img class="button" src="images/remote/up.png" width="151" height="104" alt=""></td>
+			<td colspan="2">
+				<img src="images/remote/space1.png" width="87" height="104" alt=""></td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<img class="button" src="images/remote/left.png" width="117" height="90" alt=""></td>
+			<td colspan="3">
+				<img class="button" src="images/remote/select.png" width="85" height="90" alt=""></td>
+			<td colspan="3">
+				<img class="button" src="images/remote/right.png" width="118" height="90" alt=""></td>
+		</tr>
+		<tr>
+			<td rowspan="2">
+				<img src="images/remote/space2.png" width="59" height="174" alt=""></td>
+			<td colspan="7">
+				<img class="button" src="images/remote/down.png" width="199" height="85" alt=""></td>
+			<td rowspan="2">
+				<img src="images/remote/space3.png" width="62" height="174" alt=""></td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<img class="button" src="images/remote/back.png" width="71" height="89" alt=""></td>
+			<td>
+				<img class="button" src="images/remote/pause.png" width="59" height="89" alt=""></td>
+			<td colspan="3">
+				<img class="button" src="images/remote/fwd.png" width="69" height="89" alt=""></td>
+		</tr>
+		<tr>
+			<td>
+				<img src="images/spacer.gif" width="59" height="1" alt=""></td>
+			<td>
+				<img src="images/spacer.gif" width="23" height="1" alt=""></td>
+			<td>
+				<img src="images/spacer.gif" width="35" height="1" alt=""></td>
+			<td>
+				<img src="images/spacer.gif" width="13" height="1" alt=""></td>
+			<td>
+				<img src="images/spacer.gif" width="59" height="1" alt=""></td>
+			<td>
+				<img src="images/spacer.gif" width="13" height="1" alt=""></td>
+			<td>
+				<img src="images/spacer.gif" width="31" height="1" alt=""></td>
+			<td>
+				<img src="images/spacer.gif" width="25" height="1" alt=""></td>
+			<td>
+				<img src="images/spacer.gif" width="62" height="1" alt=""></td>
+		</tr>
+	</table>
+</body>
+</html>

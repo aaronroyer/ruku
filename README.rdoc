@@ -1,0 +1,94 @@
+= Ruku -- Ruby Roku™ set-top box remote
+
+== Installation
+
+  gem install ruku
+
+== Usage
+
+The following launches the web interface. See it at http://localhost:3030
+
+  ruku --web
+
+You can use this to scan for boxes and start controlling them. I recommend
+using the keyboard (super snappy controlling!). Arrow keys (and vi directional
+keys) work, Space plays and pauses, Enter selects, and Esc is home.
+
+You can also just use the command line. Ruku needs to know about your Roku
+box(es). If you haven't found any boxes with the web interface, try:
+
+  ruku scan
+
+This will try to scan your network to find boxes. Read on below if it didn't.
+Assuming you have a least one box set up, you can start sending commands.
+
+  ruku pause   # Play/pause
+  ruku left
+  ruku up
+  ruku select
+  ruku fwd     # Fast forward
+  ruku back    # Rewind
+
+Known commands are: up down left right select home fwd back pause
+
+If scanning doesn't work for adding boxes then you'll have to figure out what
+the hostname or IP address of a box is (the hostname usually starts 'NP-').
+Then add it manually:
+
+  ruku add HOSTNAME_OR_IP
+
+Any method of adding boxes creates a '.ruku-boxes' file in your $HOME directory
+that contains an IP or hostname per line (followed optionally by a colon and a
+nickname for that box). You can edit or create this yourself. You can see all
+known boxes with:
+
+  ruku list
+
+For more help:
+
+  ruku --help
+
+== Development
+
+=== Source Repository
+
+http://github.com/aaronroyer/ruku
+
+Git clone URL is
+
+* git://github.com/aaronroyer/ruku.git
+
+=== Issues and Bug Reports
+
+You can open issues at Github
+
+* http://github.com/aaronroyer/ruku/issues
+
+Or you can send me an email: aaronroyer@gmail.com
+
+== Legal/Disclaimer
+
+Roku and the Roku logo are trademarks of Roku Inc. in the United States and other countries.
+
+Ruku is not made, supported, or endorsed by Roku Inc.
+
+== License
+
+Ruku is MIT licensed.
+
+:include: MIT-LICENSE
+
+= Other stuff
+
+Author::   Aaron Royer <aaronroyer@gmail.com>
+Requires:: Ruby 1.8.6 or later
+License::  Copyright 2010 by Aaron Royer.
+           Released under an MIT-style license.  See the LICENSE file
+           included in the distribution.
+
+== Warranty
+
+This software is provided "as is" and without any express or
+implied warranties, including, without limitation, the implied
+warranties of merchantability and fitness for a particular
+purpose.
