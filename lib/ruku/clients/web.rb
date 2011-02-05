@@ -16,7 +16,7 @@ module Ruku
 
         server_options = {
           :Port => options.port || 3030,
-          :DocumentRoot => File.join(File.dirname(__FILE__), 'web_static')
+          :DocumentRoot => File.join(File.dirname(__FILE__), 'web', 'static')
         }
         @server = HTTPServer.new(server_options)
 
