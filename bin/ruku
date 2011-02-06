@@ -40,6 +40,9 @@ Options:
   -c, --force-roku-command    Force send command to the active Roku box
       --web                   Fire up the web client (port 3030 default)
   -p, --port PORT             Specify port (only use with --web)
+      --install               Installs the web client to start up on login;
+                              right now this only works on OS X (only use
+                              with --web)
   -h, --help                  Show this message
 HELP
   puts help

@@ -8,14 +8,22 @@ include WEBrick
 module Ruku
   module Clients
     class Web
+      DEFAULT_PORT = 3030
+
       attr_reader :options
 
       def initialize(opts={})
         @options = OpenStruct.new(opts)
         handle_options
 
+        if options.install
+          require File.join(File.dirname(__FILE__), 'web', 'installer')
+          WebInstaller.install(options.port || DEFAULT_PORT)
+          exit
+        end
+
         server_options = {
-          :Port => options.port || 3030,
+          :Port => options.port || DEFAULT_PORT,
           :DocumentRoot => File.join(File.dirname(__FILE__), 'web', 'static')
         }
         @server = HTTPServer.new(server_options)
@@ -35,6 +43,7 @@ module Ruku
       def handle_options
         OptionParser.new do |opts|
           opts.on('-p', '--port PORT') {|p| options.port = p.to_i }
+          opts.on('--install') { options.install = true }
           opts.on('--web') { } # ignore
         end.parse!
       end
